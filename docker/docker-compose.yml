@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  patchman:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["/bin/bash", "/patchman-start.sh"]
+    ports:
+      - '80:80'
+    volumes:
+      - ./files/patchman-start.sh:/patchman-start.sh
+      - ./files/local_settings.py:/etc/patchman/local_settings.py
+      - ./files/patchman.conf:/etc/apache2/conf-available/patchman.conf
+      - ./files/mail_report.py:/mail_report.py
+      - ./files/remove_old_hosts.py:/remove_old_hosts.py
